@@ -5,7 +5,7 @@ public class Cashier extends Thread{
     private boolean _stop;
 
     Cashier(){
-        _isBuist = false;
+        _isBusy = false;
         _customerServed = 0;
         _stop = false;
     }
@@ -19,11 +19,11 @@ public class Cashier extends Thread{
         runner();
     }
     public void kill() {
-        stop = true;
+        _stop = true;
     }
 
     private void runner() {
-        while (stop != true) {
+        while (_stop != true) {
             // do cashier stuff here
 
             try {
