@@ -4,7 +4,7 @@ public class Cashier {
     private int customerServed;
 
     Cashier(){
-
+        // this is a comment
     }
 
 
