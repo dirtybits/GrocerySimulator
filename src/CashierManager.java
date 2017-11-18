@@ -6,7 +6,7 @@ public class CashierManager {
     private static ArrayList<Duration> _lineTime = new ArrayList<>();
     private static ArrayList<Duration> _checkoutTime = new ArrayList<>();
 
-    private static ArrayList<Cashier> cashiers = new ArrayList<>();
+    private ArrayList<Cashier> cashiers = new ArrayList<>();
 
     CashierManager(){
 
@@ -23,13 +23,7 @@ public class CashierManager {
         _checkoutTime.add(checkoutTime);
     }
 
-
-    //
-    //
-    private ArrayList<Cashier> cashierManager = new ArrayList<Cashier>();
     public void addCustomer(Customer c){
-        // todo
-        // adds the customer to the shortest line
         int shortestLineLength = Integer.MAX_VALUE;
         Cashier shortestLine = null;
 
@@ -44,7 +38,6 @@ public class CashierManager {
 
     public void rearangeLines() {
         while (shouldBeRearranged()) {
-
 
             int longestLine = 0;
             Cashier longestLineCash = null;
