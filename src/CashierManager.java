@@ -14,8 +14,13 @@ public class CashierManager {
 
     //
     private ArrayList<Cashier> cashierManager = new ArrayList<Cashier>();
-    public void addCustomer(){
+    public void addCustomer(Customer c){
+        // todo
+        // adds the customer to the shortest line
 
+    }
+    public void rearangeLines(){
+        // todo
     }
 
 
