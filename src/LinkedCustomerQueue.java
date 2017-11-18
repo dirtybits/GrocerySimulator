@@ -41,6 +41,31 @@ public class LinkedCustomerQueue {
         return customer;
 
     }
+
+    public Customer removeLast()
+    {
+        GenericNode<Customer> cursor = front;
+        if(!isEmpty())
+        {
+            Customer customer = rear.getData();
+            while(true) {
+                if (cursor.getNextNode().getData() == customer)
+                {
+                    rear = cursor;
+                    cursor.removeNodeAfter();
+                    return customer;
+                }
+                else{
+                    cursor = cursor.getNextNode();
+                }
+
+            }
+
+        }
+
+
+    }
+
     public boolean isEmpty(){
         return count == 0;
     }
