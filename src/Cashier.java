@@ -63,9 +63,8 @@ public class Cashier extends Thread{
                 }
             }
             try {
-                this.currentThread().sleep(1000
+                this.currentThread().sleep(1000);
 
-                );
             } catch (InterruptedException e) {
                 //.sleep can throw and exception
             }
