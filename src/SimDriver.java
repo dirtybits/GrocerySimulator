@@ -7,6 +7,9 @@ public class SimDriver {
         SimDriver sd = new SimDriver();
         CashierManager manager = new CashierManager();
 
+
+
+
         while (sd.keepRunning){
             Double value = Math.random();
             if (value > 0.75){
