@@ -36,7 +36,7 @@ public class CashierManager {
         shortestLine.addCustomerToLine(c);
     }
 
-    public void rearangeLines() {
+    public void rearrangeLines() {
         while (shouldBeRearranged()) {
 
             int longestLine = 0;

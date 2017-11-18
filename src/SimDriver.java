@@ -23,7 +23,7 @@ public class SimDriver {
                 }
 
             }
-            manager.rearangeLines();
+            manager.rearrangeLines();
         }
     }
 
