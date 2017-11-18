@@ -14,8 +14,6 @@ public class CashierManager {
             Cashier c = new Cashier();
             cashiers.add(c);
         }
-
-
     }
 
     public static void times(Duration lineTime, Duration checkoutTime){
