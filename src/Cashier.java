@@ -13,7 +13,7 @@ public class Cashier extends Thread{
         line = new LinkedCustomerQueue();
     }
 
-    // returnes true if the cashier is not serving anyone and the customer queue is empty
+    // returns true if the cashier is not serving anyone and the customer queue is empty
     public boolean isNotBusy(){
         if (line.size() == 0 && _isServing ==false){
             return true;
@@ -27,7 +27,7 @@ public class Cashier extends Thread{
         runner();
     }
 
-    // the infinate loop of the cashier class
+    // the infinite loop of the cashier class
     private void runner() {
         while (_stop != true) {
             // do cashier stuff here
