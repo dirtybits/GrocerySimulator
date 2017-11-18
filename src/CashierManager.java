@@ -13,6 +13,7 @@ public class CashierManager {
 
 
     //
+    //
     private ArrayList<Cashier> cashierManager = new ArrayList<Cashier>();
     public void addCustomer(Customer c){
         // todo
