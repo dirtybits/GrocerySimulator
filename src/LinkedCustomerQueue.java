@@ -59,7 +59,7 @@ public class LinkedCustomerQueue {
         return count;
     }
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         LinkedCustomerQueue queue = new LinkedCustomerQueue();
 
         queue.add(new Customer());
@@ -71,6 +71,6 @@ public class LinkedCustomerQueue {
         System.out.println(queue.toString());
 
     }
-
+*/
 
 }
