@@ -11,6 +11,7 @@ public class CashierManager {
         _checkoutTime.add(checkoutTime);
     }
     //
+    //
     private ArrayList<Cashier> cashierManager = new ArrayList<Cashier>();
 
     public CashierManager () {
