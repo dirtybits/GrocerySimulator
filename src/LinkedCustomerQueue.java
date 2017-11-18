@@ -62,8 +62,7 @@ public class LinkedCustomerQueue {
             }
 
         }
-
-
+        return null;
     }
 
     public boolean isEmpty(){

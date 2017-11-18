@@ -1,3 +1,4 @@
+import java.time.*;
 public class Cashier extends Thread{
 
     private boolean _isBusy = false;
@@ -5,8 +6,11 @@ public class Cashier extends Thread{
     private boolean _stop = false;
     public LinkedCustomerQueue line;
     private boolean _isServing = false;
+
     private Customer _currentCustomer = null;
     private int _timeSpentServing = 0;
+    private Instant _currentCustomerStartServingTime;
+    private Instant _currentCustomerEndServingTime;
 
 
     Cashier(){
@@ -35,12 +39,23 @@ public class Cashier extends Thread{
                 // try to get the next customer
                 if (line.size() != 0){
                     _currentCustomer = line.remove();
+                    _currentCustomer.startedServing();
+
+                    _currentCustomerStartServingTime = Instant.now();
+
                     _timeSpentServing = 0;
                 }
             }else{
 
                 if (_timeSpentServing == _currentCustomer.getCheckoutTime()){
                     //checkout is done
+                    _currentCustomerEndServingTime = Instant.now();
+
+
+                    // update times in the manager class
+                    Duration lineTime = _currentCustomer.getLineTime();
+                    Duration checkoutTime = Duration.between(_currentCustomerStartServingTime, _currentCustomerEndServingTime);
+                    CashierManager.times(lineTime, checkoutTime);
 
                 }else{
                     // add 1 to the process time
@@ -48,7 +63,7 @@ public class Cashier extends Thread{
                 }
             }
             try {
-                this.currentThread().sleep(10
+                this.currentThread().sleep(1000
 
                 );
             } catch (InterruptedException e) {
@@ -70,7 +85,6 @@ public class Cashier extends Thread{
 
     // return the customer at the end of the line
     public Customer getCustomerFromEndOfLine(){
-        // todo
-
+        return line.removeLast();
     }
 }
