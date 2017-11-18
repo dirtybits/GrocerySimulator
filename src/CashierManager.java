@@ -10,7 +10,7 @@ public class CashierManager {
         _lineTime.add(lineTime);
         _checkoutTime.add(checkoutTime);
     }
-
+    //
     private ArrayList<Cashier> cashierManager = new ArrayList<Cashier>();
 
     public CashierManager () {
