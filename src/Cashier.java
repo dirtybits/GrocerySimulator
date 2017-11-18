@@ -6,6 +6,7 @@ public class Cashier {
     Cashier(){
         // this is a comment
         // this is a second comment
+        //this is a third comment
     }
 
 
