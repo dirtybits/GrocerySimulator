@@ -7,10 +7,6 @@ public class Cashier {
 
     }
 
-    public int getServeTime(){
-
-        return serveTime;
-    }
 
     public void isReady(){
 
