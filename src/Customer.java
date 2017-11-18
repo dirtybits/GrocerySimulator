@@ -6,7 +6,7 @@ import java.util.Random;
 public class Customer {
 
     private int _itemCount = 0;
-    private int _timingMultiplier = 10;
+    private int _timingMultiplier = 2;
     private Instant _lineStartTime = null;
     private Instant _lineEndTime = null;
     public Duration checkoutTime = null;
@@ -33,11 +33,6 @@ public class Customer {
 
     public void startedServing(){
         _lineEndTime = Instant.now();
-    }
-
-    public double getWaitTime(){
-        // todo
-
     }
 
     public int getCheckoutTime() {
