@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.time.Duration;
+import java.time.Instant;
 
 public class CashierManager {
     private int _cashierCount = 5;
@@ -7,6 +8,9 @@ public class CashierManager {
     private static ArrayList<Duration> _checkoutTime = new ArrayList<>();
 
     private ArrayList<Cashier> cashiers = new ArrayList<>();
+
+
+    // todo add methods to average timing and return results to the GUI.
 
     CashierManager(){
 
@@ -31,6 +35,13 @@ public class CashierManager {
                 shortestLine = cash;
             }
         }
+
+        //for debugging {
+        for (int i = cashiers.size() - 1; i >= 0; i--){
+            System.out.println("Cashier " + i + " has " + cashiers.get(i).line.size() + " customers");
+        }
+        // }
+
         shortestLine.addCustomerToLine(c);
     }
 
@@ -73,5 +84,50 @@ public class CashierManager {
             return true;
         }
         return false;
+    }
+    // returns the stats of the cashiers as of the current time
+    public Duration[] getStats(){
+
+        Duration averageLineTime = Duration.ZERO;
+        Duration averageCheckoutTime = Duration.ZERO;
+        Duration averageTotalTime = Duration.ZERO;
+
+        int size = _lineTime.size();
+
+        //populate the average variables
+        for (int i = size - 1; i>= 1; i--){
+            averageLineTime.plus(_lineTime.get(i));
+            averageCheckoutTime.plus(_checkoutTime.get(i));
+
+
+        }
+        //divide by the number of indecies
+
+        averageLineTime.dividedBy(size);
+        averageCheckoutTime.dividedBy(size);
+
+        averageTotalTime.plus(averageLineTime);
+        averageTotalTime.plus(averageCheckoutTime);
+
+
+
+        Duration retVal[] = new Duration[3];
+        retVal[0] = averageLineTime;
+        retVal[1] = averageCheckoutTime;
+        retVal[2] = averageTotalTime;
+
+        return retVal;
+    }
+
+    // returns true is the cashier threads were all successfully destroyed.
+    public boolean endSimulation(){
+        try {
+            for (int i = cashiers.size() - 1; i >= 0; i--) {
+                cashiers.get(i).kill();
+            }
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 }

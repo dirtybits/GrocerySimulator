@@ -50,7 +50,7 @@ public class Cashier extends Thread{
                 if (_timeSpentServing == _currentCustomer.getCheckoutTime()){
                     //checkout is done
                     _currentCustomerEndServingTime = Instant.now();
-
+                    _customerServed++;
 
                     // update times in the manager class
                     Duration lineTime = _currentCustomer.getLineTime();
@@ -73,7 +73,8 @@ public class Cashier extends Thread{
 
 
     // stops and terminates the cashier
-    public void kill() {
+    // If the thread tries to kill itself but is already dead an exception can be thrown
+    public void kill() throws Exception {
         _stop = true;
     }
 
