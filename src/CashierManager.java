@@ -9,14 +9,11 @@ public class CashierManager {
 
     private ArrayList<Cashier> cashiers = new ArrayList<>();
 
-
-    // todo add methods to average timing and return results to the GUI.
-
-    CashierManager(){
-
+    CashierManager(int cashierSleepInterval){
         for (int i = 0; i < _cashierCount; i++){
-            Cashier c = new Cashier();
+            Cashier c = new Cashier(cashierSleepInterval);
             cashiers.add(c);
+            c.start();
         }
     }
 
@@ -118,6 +115,20 @@ public class CashierManager {
 
         return retVal;
     }
+
+    //returns true if all cashiers have finished
+    public boolean cashiersDone(){
+        boolean flag = true;
+
+        for (int i = cashiers.size() - 1; i >= 0; i--){
+            if(cashiers.get(i).isNotBusy() == false){
+                flag = false;
+            }
+        }
+
+        return flag;
+    }
+
 
     // returns true is the cashier threads were all successfully destroyed.
     public boolean endSimulation(){

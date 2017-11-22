@@ -16,14 +16,14 @@ public class LinkedCustomerQueue {
 
             front = new GenericNode<Customer>(customer, front);
             rear = front;
-            count++;
 
         }else{
 
             rear.setNextNode(new GenericNode<Customer>(customer,null));
             rear = rear.getNextNode();
-            count++;
         }
+        count++;
+
     }
     public Customer remove(){
 
@@ -53,6 +53,8 @@ public class LinkedCustomerQueue {
                 {
                     rear = cursor;
                     cursor.removeNodeAfter();
+                    // dont forget to decrement the count variable
+                    count--;
                     return customer;
                 }
                 else{

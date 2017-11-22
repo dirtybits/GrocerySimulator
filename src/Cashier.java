@@ -12,9 +12,11 @@ public class Cashier extends Thread{
     private Instant _currentCustomerStartServingTime;
     private Instant _currentCustomerEndServingTime;
 
+    private int _sleepInterval = 0;
 
-    Cashier(){
+    Cashier(int cashierSleepInterval){
         line = new LinkedCustomerQueue();
+        _sleepInterval = cashierSleepInterval;
     }
 
     // returns true if the cashier is not serving anyone and the customer queue is empty
@@ -44,6 +46,7 @@ public class Cashier extends Thread{
                     _currentCustomerStartServingTime = Instant.now();
 
                     _timeSpentServing = 0;
+                    _isServing = true;
                 }
             }else{
 
@@ -57,13 +60,19 @@ public class Cashier extends Thread{
                     Duration checkoutTime = Duration.between(_currentCustomerStartServingTime, _currentCustomerEndServingTime);
                     CashierManager.times(lineTime, checkoutTime);
 
+                    // remove the customer from the line
+                    // grab the next customer at the next iteration
+                    _currentCustomer = null;
+                    _isServing = false;
+
+                    System.out.println("Checkout Finished");
                 }else{
                     // add 1 to the process time
                     _timeSpentServing += 1;
                 }
             }
             try {
-                this.currentThread().sleep(1000);
+                this.currentThread().sleep(_sleepInterval);
 
             } catch (InterruptedException e) {
                 //.sleep can throw and exception
@@ -86,5 +95,9 @@ public class Cashier extends Thread{
     // return the customer at the end of the line
     public Customer getCustomerFromEndOfLine(){
         return line.removeLast();
+    }
+
+    public int getServedCustomers(){
+        return _customerServed;
     }
 }
