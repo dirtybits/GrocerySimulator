@@ -142,3 +142,4 @@ public class CashierManager {
         return true;
     }
 }
+//c

@@ -117,3 +117,4 @@ public class Cashier extends Thread{
         return percentageDone;
     }
 }
+//a
