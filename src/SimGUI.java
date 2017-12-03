@@ -14,6 +14,7 @@ public class SimGUI {
     private JButton startSimulatorButton;
     private JTextArea textArea1;
 
+    // this is
 
     public SimGUI() {
         startSimulatorButton.addActionListener(new ActionListener() {
