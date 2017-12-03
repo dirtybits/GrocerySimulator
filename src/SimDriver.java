@@ -2,35 +2,11 @@ import java.time.Duration;
 
 public class SimDriver {
     public boolean keepRunning = true;
-    public static final int _CASHIERSLEEPINTERVAL = 1000;
+    public static final int _CASHIERSLEEPINTERVAL = 100;
     public static final double LIKLYHOODOFACUSTOMER = 0.75;
 
     public static void main(String args[]){
-
         CashierManager manager = new CashierManager(_CASHIERSLEEPINTERVAL);
-
-
-
-        // the real one
-//        while (sd.keepRunning){
-//            Double value = Math.random();
-//            if (value > 0.75){
-//                // add a new customer
-//                Customer c = new Customer();
-//                manager.addCustomer(c);
-//
-//            }else{
-//                try {
-//                    Thread.sleep(1000);
-//
-//                } catch (InterruptedException e) {
-//                    //.sleep can throw and exception
-//                }
-//
-//            }
-//            manager.rearrangeLines();
-//        }
-
           //test code
          for (int i = 100; i>= -0; i--){
               Double value = Math.random();
@@ -48,7 +24,7 @@ public class SimDriver {
               }
               manager.rearrangeLines();
          }
-         while(manager.cashiersDone() == false){
+         while(!manager.cashiersDone()){
              try {
                  Thread.sleep(100);
              } catch (InterruptedException e) {
@@ -58,10 +34,12 @@ public class SimDriver {
 
          System.out.println("Stats:");
 
-        Duration durStats[] = manager.getStats();
-        System.out.println(durStats[0].getSeconds());
-        System.out.println(durStats[1].getSeconds());
-        System.out.println(durStats[2].getSeconds());
+        long durStats[] = manager.getStats();
+        System.out.println(durStats[0]);
+        System.out.println(durStats[1]);
+        System.out.println(durStats[2]);
+        System.out.println(durStats[3]);
+
     }
 
 }

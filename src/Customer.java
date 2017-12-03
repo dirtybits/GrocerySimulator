@@ -7,32 +7,27 @@ public class Customer {
 
     private int _itemCount = 0;
     private int _timingMultiplier = 2;
-    private Instant _lineStartTime = null;
-    private Instant _lineEndTime = null;
+    private long _lineStartTime = 0;
+    private long _lineEndTime = 0;
     public Duration checkoutTime = null;
 
     public Customer(){
         // preliminary numbers
         _itemCount = getRandomInteger(50, 1);
-        _lineStartTime = Instant.now();
+        _lineStartTime = System.nanoTime();
 
     }
 
-    //@Override
-    //public String toString() {
-        //return "Customer [arrivalTime=" + arrivalTime + "]";
-    //}
-
-    public Instant getArrivalTime() {
+    public long getArrivalTime() {
         return _lineStartTime;
     }
     //returns the time spent in line
-    public Duration getLineTime() {
-        return Duration.between(_lineStartTime, _lineEndTime);
+    public long getLineTime() {
+        return (_lineEndTime - _lineStartTime);
     }
 
     public void startedServing(){
-        _lineEndTime = Instant.now();
+        _lineEndTime = System.nanoTime();
     }
 
     public int getCheckoutTime() {

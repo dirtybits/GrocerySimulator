@@ -1,11 +1,9 @@
 import java.util.ArrayList;
-import java.time.Duration;
-import java.time.Instant;
 
 public class CashierManager {
     private int _cashierCount = 5;
-    private static ArrayList<Duration> _lineTime = new ArrayList<>();
-    private static ArrayList<Duration> _checkoutTime = new ArrayList<>();
+    private static ArrayList<Long> _lineTime = new ArrayList<>();
+    private static ArrayList<Long> _checkoutTime = new ArrayList<>();
 
     private ArrayList<Cashier> cashiers = new ArrayList<>();
 
@@ -17,7 +15,7 @@ public class CashierManager {
         }
     }
 
-    public static void times(Duration lineTime, Duration checkoutTime){
+    public static void times(long lineTime, long checkoutTime){
         _lineTime.add(lineTime);
         _checkoutTime.add(checkoutTime);
     }
@@ -61,7 +59,10 @@ public class CashierManager {
                     shortestLineCash = cash;
                 }
             }
-            shortestLineCash.addCustomerToLine(longestLineCash.getCustomerFromEndOfLine());
+            Customer customer = longestLineCash.getCustomerFromEndOfLine();
+            if (customer != null){
+                shortestLineCash.addCustomerToLine(customer);
+            }
         }
     }
 
@@ -77,42 +78,40 @@ public class CashierManager {
             }
         }
 
-        if ((longestLine - shortestLine) > 1){
-            return true;
-        }
-        return false;
+        return ((longestLine - shortestLine) > 1);
     }
     // returns the stats of the cashiers as of the current time
-    public Duration[] getStats(){
+    public long[] getStats(){
 
-        Duration averageLineTime = Duration.ZERO;
-        Duration averageCheckoutTime = Duration.ZERO;
-        Duration averageTotalTime = Duration.ZERO;
+        long averageLineTime = 0;
+        long averageCheckoutTime = 0;
+        long averageTotalTime;
 
         int size = _lineTime.size();
 
         //populate the average variables
-        for (int i = size - 1; i>= 1; i--){
-            averageLineTime.plus(_lineTime.get(i));
-            averageCheckoutTime.plus(_checkoutTime.get(i));
-
-
+        for (int i = 0; i<= size - 1; i++){
+            averageLineTime += _lineTime.get(i);
+            averageCheckoutTime +=_checkoutTime.get(i);
         }
         //divide by the number of indecies
 
-        averageLineTime.dividedBy(size);
-        averageCheckoutTime.dividedBy(size);
+        averageLineTime /= size;
+        averageCheckoutTime /= size;
 
-        averageTotalTime.plus(averageLineTime);
-        averageTotalTime.plus(averageCheckoutTime);
+        averageTotalTime = averageLineTime + averageCheckoutTime;
 
-        //todo return the number of customers served aswell
+        long customersServed = 0;
+        for (int i = 0; i<= _cashierCount - 1; i++){
+            customersServed += cashiers.get(i).getServedCustomers();
+        }
 
-        Duration retVal[] = new Duration[3];
+        long retVal[] = new long[4];
 
         retVal[0] = averageLineTime;
         retVal[1] = averageCheckoutTime;
         retVal[2] = averageTotalTime;
+        retVal[3] = customersServed;
 
         return retVal;
     }
@@ -122,14 +121,13 @@ public class CashierManager {
         boolean flag = true;
 
         for (int i = cashiers.size() - 1; i >= 0; i--){
-            if(cashiers.get(i).isNotBusy() == false){
+            if(!cashiers.get(i).isNotBusy()){
                 flag = false;
             }
         }
 
         return flag;
     }
-
 
     // returns true is the cashier threads were all successfully destroyed.
     public boolean endSimulation(){

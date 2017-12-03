@@ -9,8 +9,8 @@ public class Cashier extends Thread{
 
     private Customer _currentCustomer = null;
     private int _timeSpentServing = 0;
-    private Instant _currentCustomerStartServingTime;
-    private Instant _currentCustomerEndServingTime;
+    private long _currentCustomerStartServingTime;
+    private long _currentCustomerEndServingTime;
 
     private int _sleepInterval = 0;
 
@@ -49,7 +49,7 @@ public class Cashier extends Thread{
                     _currentCustomer = line.remove();
                     _currentCustomer.startedServing();
 
-                    _currentCustomerStartServingTime = Instant.now();
+                    _currentCustomerStartServingTime = System.nanoTime();
 
                     _timeSpentServing = 0;
                     _isServing = true;
@@ -61,16 +61,16 @@ public class Cashier extends Thread{
 
                 if (_timeSpentServing == _currentCustomer.getCheckoutTime()){
                     //checkout is done
-                    _currentCustomerEndServingTime = Instant.now();
+                    _currentCustomerEndServingTime = System.nanoTime();
                     _customerServed++;
 
                     // update times in the manager class
-                    Duration lineTime = _currentCustomer.getLineTime();
+                    long lineTime = _currentCustomer.getLineTime();
 
-                    System.out.println(lineTime.getSeconds());
-
-                    Duration checkoutTime = Duration.between(_currentCustomerStartServingTime, _currentCustomerEndServingTime);
+                    long checkoutTime =  _currentCustomerEndServingTime - _currentCustomerStartServingTime;
                     CashierManager.times(lineTime, checkoutTime);
+
+
 
                     // remove the customer from the line
                     // grab the next customer at the next iteration
@@ -111,5 +111,12 @@ public class Cashier extends Thread{
 
     public int getServedCustomers(){
         return _customerServed;
+    }
+
+    public int getPercentageDone(){
+
+        //todo
+
+        return 0;
     }
 }

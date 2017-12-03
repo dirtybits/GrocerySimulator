@@ -49,18 +49,22 @@ public class LinkedCustomerQueue {
         {
             Customer customer = rear.getData();
             while(true) {
-                if (cursor.getNextNode().getData() == customer)
-                {
-                    rear = cursor;
-                    cursor.removeNodeAfter();
-                    // dont forget to decrement the count variable
-                    count--;
-                    return customer;
-                }
-                else{
-                    cursor = cursor.getNextNode();
-                }
+                try{
+                    if (cursor.getNextNode().getData() == customer)
+                    {
+                        rear = cursor;
+                        cursor.removeNodeAfter();
+                        // dont forget to decrement the count variable
+                        count--;
+                        return customer;
+                    }
+                    else{
+                        cursor = cursor.getNextNode();
+                    }
 
+                }catch(java.lang.NullPointerException ex){
+                    return null;
+                }
             }
 
         }
