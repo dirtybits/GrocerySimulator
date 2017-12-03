@@ -7,17 +7,23 @@ public class SimGUI {
 
     private JPanel panel1;
     private JProgressBar progressBar1;
-    private JProgressBar progressBar2;
+    private JProgressBar progressBar5;
     private JProgressBar progressBar3;
     private JProgressBar progressBar4;
-    private JProgressBar progressBar5;
+    private JProgressBar progressBar2;
     private JButton startSimulatorButton;
-    private JTextArea textArea1;
-    private JCheckBox busyCheckBox;
-    private JCheckBox busyCheckBox1;
-    private JCheckBox busyCheckBox2;
-    private JCheckBox busyCheckBox3;
-    private JCheckBox busyCheckBox4;
+    private JCheckBox busy1CheckBox;
+    private JCheckBox busy2CheckBox;
+    private JCheckBox busy3CheckBox;
+    private JCheckBox busy4CheckBox;
+    private JCheckBox busy5CheckBox;
+    private JButton stopButton;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JTextField textField5;
+    private JTextField textField6;
 
 
     public SimGUI() {
@@ -31,5 +37,6 @@ public class SimGUI {
                }
             }
         });
+
     }
 }
