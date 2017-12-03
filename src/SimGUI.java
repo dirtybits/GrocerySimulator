@@ -166,9 +166,9 @@ public class SimGUI extends JFrame{
                     updateControls();
                     Thread.sleep(_sleepTime);
                 } catch (InterruptedException e) {}
-                catch (java.lang.NullPointerException f){
+                  catch (java.lang.NullPointerException f){
                     System.out.println("null pointer");
-                }
+                  }
                 }
 
                 while (!myManager.cashiersDone()){
@@ -181,4 +181,5 @@ public class SimGUI extends JFrame{
         }
     }
     //this is a comment
+    // this is a 2nd comment
 }
