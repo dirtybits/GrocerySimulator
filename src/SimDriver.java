@@ -1,7 +1,4 @@
-import java.time.Duration;
-
 public class SimDriver {
-    public boolean keepRunning = true;
     public static final int _CASHIERSLEEPINTERVAL = 100;
     public static final double LIKLYHOODOFACUSTOMER = 0.75;
 
