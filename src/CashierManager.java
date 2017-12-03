@@ -5,7 +5,7 @@ public class CashierManager {
     private static ArrayList<Long> _lineTime = new ArrayList<>();
     private static ArrayList<Long> _checkoutTime = new ArrayList<>();
 
-    private ArrayList<Cashier> cashiers = new ArrayList<>();
+    public ArrayList<Cashier> cashiers = new ArrayList<>();
 
     CashierManager(int cashierSleepInterval){
         for (int i = 0; i < _cashierCount; i++){
@@ -14,6 +14,7 @@ public class CashierManager {
             c.start();
         }
     }
+
 
     public static void times(long lineTime, long checkoutTime){
         _lineTime.add(lineTime);

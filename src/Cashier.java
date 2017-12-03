@@ -44,9 +44,9 @@ public class Cashier extends Thread{
     private void runner() {
         while (_stop != true) {
             // do cashier stuff here
-            if (_currentCustomer == null){
+            if (_currentCustomer == null) {
                 // try to get the next customer
-                if (line.size() != 0){
+                if (line.size() != 0) {
                     _currentCustomer = line.remove();
                     _currentCustomer.startedServing();
 
@@ -58,9 +58,9 @@ public class Cashier extends Thread{
                     // ask the manager to rearrange lines considering that this one is now shorter
                     myManager.rearrangeLines();
                 }
-            }else{
+            } else {
 
-                if (_timeSpentServing == _currentCustomer.getCheckoutTime()){
+                if (_timeSpentServing == _currentCustomer.getCheckoutTime()) {
                     //checkout is done
                     _currentCustomerEndServingTime = System.nanoTime();
                     _customerServed++;
@@ -68,9 +68,8 @@ public class Cashier extends Thread{
                     // update times in the manager class
                     long lineTime = _currentCustomer.getLineTime();
 
-                    long checkoutTime =  _currentCustomerEndServingTime - _currentCustomerStartServingTime;
+                    long checkoutTime = _currentCustomerEndServingTime - _currentCustomerStartServingTime;
                     CashierManager.times(lineTime, checkoutTime);
-
 
 
                     // remove the customer from the line
@@ -79,20 +78,18 @@ public class Cashier extends Thread{
                     _isServing = false;
 
                     System.out.println("Checkout Finished");
-                }else{
+                } else {
                     // add 1 to the process time
                     _timeSpentServing += 1;
                 }
             }
             try {
                 this.currentThread().sleep(_sleepInterval);
-
-            } catch (InterruptedException e) {
-                //.sleep can throw and exception
+                percentageDone = (100 / _currentCustomer.getCheckoutTime()) * _timeSpentServing;
+            } catch (InterruptedException e) {//.sleep can throw and exception
+            } catch (java.lang.NullPointerException f) {
+            } catch (java.lang.ArithmeticException g) {
             }
-
-            // update the percentage done variable
-            percentageDone = (100 / _currentCustomer.getCheckoutTime()) * _timeSpentServing;
         }
     }
 

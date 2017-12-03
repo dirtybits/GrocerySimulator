@@ -3,7 +3,7 @@ import java.util.Random;
 public class Customer {
 
     private int _itemCount = 0;
-    private int _timingMultiplier = 2;
+    private double _timingMultiplier = 1.0;
     private long _lineStartTime = 0;
     private long _lineEndTime = 0;
 
@@ -27,7 +27,7 @@ public class Customer {
     }
 
     public int getCheckoutTime() {
-        return _itemCount * _timingMultiplier;
+        return (_itemCount * (int)(_timingMultiplier* 1000))/ 1000;
     }
 
     private int getRandomInteger(int upperBound, int lowerBound) {
