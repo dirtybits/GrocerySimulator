@@ -180,5 +180,5 @@ public class SimGUI extends JFrame{
             _killThread = true;
         }
     }
-//this is a change
+    //this is a comment
 }
