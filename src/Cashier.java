@@ -14,9 +14,15 @@ public class Cashier extends Thread{
 
     private int _sleepInterval = 0;
 
-    Cashier(int cashierSleepInterval){
+    private static CashierManager myManager = null;
+
+    Cashier(int cashierSleepInterval, CashierManager manager){
         line = new LinkedCustomerQueue();
         _sleepInterval = cashierSleepInterval;
+
+
+        myManager = manager;
+
     }
 
     // returns true if the cashier is not serving anyone and the customer queue is empty
@@ -47,6 +53,9 @@ public class Cashier extends Thread{
 
                     _timeSpentServing = 0;
                     _isServing = true;
+
+                    // ask the manager to rearrange lines considering that this one is now shorter
+                    myManager.rearrangeLines();
                 }
             }else{
 
@@ -57,6 +66,9 @@ public class Cashier extends Thread{
 
                     // update times in the manager class
                     Duration lineTime = _currentCustomer.getLineTime();
+
+                    System.out.println(lineTime.getSeconds());
+
                     Duration checkoutTime = Duration.between(_currentCustomerStartServingTime, _currentCustomerEndServingTime);
                     CashierManager.times(lineTime, checkoutTime);
 

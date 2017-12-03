@@ -2,7 +2,7 @@ import java.time.Duration;
 
 public class SimDriver {
     public boolean keepRunning = true;
-    public static final int _CASHIERSLEEPINTERVAL = 20;
+    public static final int _CASHIERSLEEPINTERVAL = 1000;
     public static final double LIKLYHOODOFACUSTOMER = 0.75;
 
     public static void main(String args[]){
@@ -56,10 +56,12 @@ public class SimDriver {
              }
          }
 
+         System.out.println("Stats:");
+
         Duration durStats[] = manager.getStats();
-        System.out.println(durStats[0].toString());
-        //System.out.println(durStats[1].toString());
-        //System.out.println(durStats[2].toString());
+        System.out.println(durStats[0].getSeconds());
+        System.out.println(durStats[1].getSeconds());
+        System.out.println(durStats[2].getSeconds());
     }
 
 }
