@@ -1,4 +1,3 @@
-import java.time.*;
 public class Cashier extends Thread{
 
     private boolean _isBusy = false;

@@ -1,6 +1,3 @@
-import java.time.Duration;
-import java.time.Instant;
-
 import java.util.Random;
 
 public class Customer {
@@ -9,7 +6,6 @@ public class Customer {
     private int _timingMultiplier = 2;
     private long _lineStartTime = 0;
     private long _lineEndTime = 0;
-    public Duration checkoutTime = null;
 
     public Customer(){
         // preliminary numbers
