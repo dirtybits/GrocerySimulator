@@ -11,7 +11,7 @@ public class CashierManager {
 
     CashierManager(int cashierSleepInterval){
         for (int i = 0; i < _cashierCount; i++){
-            Cashier c = new Cashier(cashierSleepInterval);
+            Cashier c = new Cashier(cashierSleepInterval, this);
             cashiers.add(c);
             c.start();
         }
@@ -106,9 +106,10 @@ public class CashierManager {
         averageTotalTime.plus(averageLineTime);
         averageTotalTime.plus(averageCheckoutTime);
 
-
+        //todo return the number of customers served aswell
 
         Duration retVal[] = new Duration[3];
+
         retVal[0] = averageLineTime;
         retVal[1] = averageCheckoutTime;
         retVal[2] = averageTotalTime;
