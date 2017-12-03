@@ -15,6 +15,8 @@ public class Cashier extends Thread{
 
     private static CashierManager myManager = null;
 
+    private int percentageDone = 0;
+
     Cashier(int cashierSleepInterval, CashierManager manager){
         line = new LinkedCustomerQueue();
         _sleepInterval = cashierSleepInterval;
@@ -26,7 +28,7 @@ public class Cashier extends Thread{
 
     // returns true if the cashier is not serving anyone and the customer queue is empty
     public boolean isNotBusy(){
-        if (line.size() == 0 && _isServing ==false){
+        if (line.size() == 0 && _isServing == false){
             return true;
         }else{
             return false;
@@ -88,9 +90,11 @@ public class Cashier extends Thread{
             } catch (InterruptedException e) {
                 //.sleep can throw and exception
             }
+
+            // update the percentage done variable
+            percentageDone = (100 / _currentCustomer.getCheckoutTime()) * _timeSpentServing;
         }
     }
-
 
     // stops and terminates the cashier
     // If the thread tries to kill itself but is already dead an exception can be thrown
@@ -107,15 +111,12 @@ public class Cashier extends Thread{
     public Customer getCustomerFromEndOfLine(){
         return line.removeLast();
     }
-
+    // returns the number of customers served
     public int getServedCustomers(){
         return _customerServed;
     }
-
+    // returns an integer representing percentage the checkout is done.
     public int getPercentageDone(){
-
-        //todo
-
-        return 0;
+        return percentageDone;
     }
 }
