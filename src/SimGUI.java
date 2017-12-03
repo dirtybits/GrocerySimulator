@@ -13,8 +13,12 @@ public class SimGUI {
     private JProgressBar progressBar5;
     private JButton startSimulatorButton;
     private JTextArea textArea1;
+    private JCheckBox busyCheckBox;
+    private JCheckBox busyCheckBox1;
+    private JCheckBox busyCheckBox2;
+    private JCheckBox busyCheckBox3;
+    private JCheckBox busyCheckBox4;
 
-    // this is
 
     public SimGUI() {
         startSimulatorButton.addActionListener(new ActionListener() {
