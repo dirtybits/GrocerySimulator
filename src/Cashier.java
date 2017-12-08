@@ -77,7 +77,6 @@ public class Cashier extends Thread{
                     _currentCustomer = null;
                     _isServing = false;
 
-                    System.out.println("Checkout Finished");
                 } else {
                     // add 1 to the process time
                     _timeSpentServing += 1;

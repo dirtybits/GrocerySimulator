@@ -14,6 +14,7 @@ public class Customer {
 
     }
 
+    //returns a long from the arrival time of this cusomter
     public long getArrivalTime() {
         return _lineStartTime;
     }
@@ -22,14 +23,17 @@ public class Customer {
         return (_lineEndTime - _lineStartTime);
     }
 
+    // used for timing the serving of a customer
     public void startedServing(){
         _lineEndTime = System.nanoTime();
     }
 
+    // returns the time it will take to checkout this customer
     public int getCheckoutTime() {
         return (_itemCount * (int)(_timingMultiplier* 1000))/ 1000;
     }
 
+    //returns a random integer
     private int getRandomInteger(int upperBound, int lowerBound) {
         Random rand = new Random();
         rand.setSeed(System.currentTimeMillis());

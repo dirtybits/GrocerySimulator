@@ -38,18 +38,13 @@ public class SimGUI extends JFrame{
         startSimulatorButton.addActionListener(new ActionListener() {
             //@Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(e.toString());
-
-                System.out.println("pre making updater");
                 try{
 
                    //SimDriver.main(new String[0]);
-                    System.out.println("pre making updater");
 
                    _myControlUpdater = new controlUpdater(_CASHIERSLEEPINTERVAL);
                    _myControlUpdater.start();
 
-                   System.out.println("post making updater");
                    startSimulation();
 
                } catch (Exception ex){
@@ -120,7 +115,6 @@ public class SimGUI extends JFrame{
             }catch(java.lang.InterruptedException e){}
     }}
     private void printStats(CashierManager manager){
-        System.out.println("Stats:");
 
         long durStats[] = manager.getStats();
 
@@ -167,7 +161,6 @@ public class SimGUI extends JFrame{
                     Thread.sleep(_sleepTime);
                 } catch (InterruptedException e) {}
                   catch (java.lang.NullPointerException f){
-                    System.out.println("null pointer");
                   }
                 }
 

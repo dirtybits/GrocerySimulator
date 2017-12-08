@@ -7,6 +7,7 @@ public class CashierManager {
 
     public ArrayList<Cashier> cashiers = new ArrayList<>();
 
+    // constructor
     CashierManager(int cashierSleepInterval){
         for (int i = 0; i < _cashierCount; i++){
             Cashier c = new Cashier(cashierSleepInterval, this);
@@ -15,12 +16,13 @@ public class CashierManager {
         }
     }
 
-
+    // a logger function for keeping track of times
     public static void times(long lineTime, long checkoutTime){
         _lineTime.add(lineTime);
         _checkoutTime.add(checkoutTime);
     }
 
+    // ads a customer to the end of the shortest line
     public void addCustomer(Customer c){
         int shortestLineLength = Integer.MAX_VALUE;
         Cashier shortestLine = null;
@@ -32,15 +34,11 @@ public class CashierManager {
             }
         }
 
-        //for debugging {
-        for (int i = cashiers.size() - 1; i >= 0; i--){
-            System.out.println("Cashier " + i + " has " + cashiers.get(i).line.size() + " customers");
-        }
-        // }
 
         shortestLine.addCustomerToLine(c);
     }
 
+    // the logic behind rearranging the lines
     public void rearrangeLines() {
         while (shouldBeRearranged()) {
 
@@ -67,6 +65,7 @@ public class CashierManager {
         }
     }
 
+    //returns a boolean value indicating wether the lines should be rearranged
     private boolean shouldBeRearranged(){
         int longestLine = 0;
         int shortestLine = Integer.MAX_VALUE;

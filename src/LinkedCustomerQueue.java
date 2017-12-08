@@ -1,5 +1,5 @@
 
-
+// the generic queue
 public class LinkedCustomerQueue {
 
     private GenericNode<Customer> front;
@@ -10,6 +10,7 @@ public class LinkedCustomerQueue {
         this.count = count;
     }
 
+    // adds a customer to the queue
     public void add(Customer customer){
 
         if(front == null){
@@ -42,6 +43,7 @@ public class LinkedCustomerQueue {
 
     }
 
+    // returns the last item in the queue
     public Customer removeLast()
     {
         GenericNode<Customer> cursor = front;
@@ -71,7 +73,7 @@ public class LinkedCustomerQueue {
 
         return null;
     }
-
+    // returns a boolean representing the emptyness of the queue
     public boolean isEmpty(){
         return count == 0;
     }
@@ -86,23 +88,8 @@ public class LinkedCustomerQueue {
         }
         return info;
     }
+    //retuens the size of the queue
     public int size(){
         return count;
     }
-
-   /* public static void main(String[] args) {
-        LinkedCustomerQueue queue = new LinkedCustomerQueue();
-
-        queue.add(new Customer());
-        queue.add(new Customer());
-        System.out.println(queue.toString());
-
-        Customer removedCus = queue.remove();
-
-        System.out.println(queue.toString());
-
-    }
-*/
-
 }
-//d
